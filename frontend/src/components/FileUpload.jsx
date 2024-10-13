@@ -64,7 +64,7 @@ const FileUpload = () => {
       onDrop={handleDrop}
     >
       {uploadedFile ? (
-        <div className="w-[30rem] h-[10rem] p-3 bg-white border border-solid border-gray-300 rounded-xl  dark:border-neutral-600 flex align-middle justify-center flex-col">
+        <div className="w-[30vw] h-[15rem] p-3 bg-white border border-solid border-gray-300 rounded-xl  dark:border-neutral-600 flex align-middle justify-center flex-col">
           <div className="mb-1 flex justify-between items-center">
             <div className="flex items-center gap-x-3">
               <span
@@ -123,7 +123,7 @@ const FileUpload = () => {
           </div>
         </div>
       ) : (
-        <div className=" w-[60vw] h-[10rem]  cursor-pointer p-12 flex justify-center align-middle bg-white border border-dashed border-gray-300 rounded-xl  dark:border-neutral-600" onClick={() => document.getElementById('fileInput').click()}>
+        <div className=" w-[30vw] h-[15rem]  cursor-pointer p-12 flex justify-center align-middle bg-white border border-dashed border-gray-300 rounded-xl  dark:border-neutral-600" onClick={() => document.getElementById('fileInput').click()}>
           <div className="text-center">
             <h1><FontAwesomeIcon icon={faUpload} size="2x"/></h1> 
             <div className="mt-4 flex flex-wrap justify-center text-sm leading-6 text-gray-600 align-middle">

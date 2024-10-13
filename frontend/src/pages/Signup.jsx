@@ -1,5 +1,6 @@
 import React from 'react';
 import image from "../assets/images/login2.jpg"
+import { Link } from 'react-router-dom';
 function Signup(props) {
     return (
         <>
@@ -36,7 +37,7 @@ function Signup(props) {
                     name="firstname"
                     id="firstname"
                     placeholder="First Name"
-                    className="block w-full px-4 py-2 mt-2 text-black placeholder-gray-100 bg-white border border-gray-200 rounded-md dark:placeholder-gray-400 dark:bg-white  dark:border-gray-200 shadow-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-4 py-2 mt-2 text-black placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-400 dark:bg-white  dark:border-gray-200 shadow-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <div className="mt-4">
@@ -51,7 +52,7 @@ function Signup(props) {
                     name="lastname"
                     id="lastname"
                     placeholder="Last Name"
-                    className="block w-full px-4 py-2 mt-2 text-black placeholder-gray-100 bg-white border border-gray-200 rounded-md dark:placeholder-gray-400 dark:bg-white  dark:border-gray-200 shadow-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-4 py-2 mt-2 text-black placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-400 dark:bg-white  dark:border-gray-200 shadow-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
                 <div className="mt-4">
@@ -66,7 +67,7 @@ function Signup(props) {
                     name="email"
                     id="email"
                     placeholder="Your Email"
-                    className="block w-full px-4 py-2 mt-2 text-black placeholder-gray-100 bg-white border border-gray-200 rounded-md dark:placeholder-gray-400 dark:bg-white  dark:border-gray-200 shadow-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                    className="block w-full px-4 py-2 mt-2 text-black placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-400 dark:bg-white  dark:border-gray-200 shadow-md focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   />
                 </div>
 
@@ -85,7 +86,7 @@ function Signup(props) {
                     name="password"
                     id="password"
                     placeholder="Your Password"
-                    className="block w-full px-4 py-2 mt-2 text-black placeholder-gray-100 bg-white border border-gray-200 rounded-md dark:placeholder-gray-400 dark:bg-white shadow-md  dark:border-gray-200 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 "
+                    className="block w-full px-4 py-2 mt-2 text-black placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-400 dark:bg-white shadow-md  dark:border-gray-200 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40 "
                   />
                 </div>
 
@@ -93,19 +94,19 @@ function Signup(props) {
                   <button
                     className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50"
                   >
-                    Sign in
+                    Sign Up
                   </button>
                 </div>
               </form>
 
               <p className="mt-6 text-sm text-center text-gray-700">
-                Don&#x27;t have an account yet?{' '}
-                <a
-                  href="#"
+                Already have an account ?{' '}
+                <Link
+                  to="/login"
                   className="text-blue-500 focus:outline-none focus:underline hover:underline"
                 >
-                  Sign up
-                </a>
+                  Sign in
+                </Link>
                 .
               </p>
             </div>
