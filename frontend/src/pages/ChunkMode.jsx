@@ -80,7 +80,7 @@ const ChunkMode = () => {
               class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
             >
               Recommendations
-              <span class="inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium bg-yellow-500 text-white">
+              <span class="inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium bg-green-500 text-white">
                 10
               </span>
             </button>
@@ -94,7 +94,7 @@ const ChunkMode = () => {
               </p>
               <div className="flex gap-3 mt-5 ">
                 <Link className="text-blue-500 font-bold">Sources</Link>
-                <Link className="text-yellow-500 ml-2 font-bold">Recommendations</Link>
+                <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
               </div>
             </div>
             <div className="p-4 border-b-2">
@@ -104,7 +104,7 @@ const ChunkMode = () => {
               </p>
               <div className="flex gap-3 mt-5 ">
               <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-yellow-500 ml-2 font-bold">Recommendations</Link>
+              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
               </div>
             </div>
             <div className="p-4 border-b-2">
@@ -114,7 +114,7 @@ const ChunkMode = () => {
               </p>
               <div className="flex gap-3 mt-5 ">
               <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-yellow-500 ml-2 font-bold">Recommendations</Link>
+              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
               </div>
             </div>
             <div className="p-4 border-b-2">
@@ -124,7 +124,7 @@ const ChunkMode = () => {
               </p>
               <div className="flex gap-3 mt-5 ">
               <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-yellow-500 ml-2 font-bold">Recommendations</Link>
+              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
               </div>
             </div>
             <div className="p-4 border-b-2">
@@ -134,7 +134,7 @@ const ChunkMode = () => {
               </p>
               <div className="flex gap-3 mt-5 ">
               <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-yellow-500 ml-2 font-bold">Recommendations</Link>
+              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
               </div>
             </div>
             <div className="p-4 border-b-2">
@@ -144,7 +144,7 @@ const ChunkMode = () => {
               </p>
               <div className="flex gap-3 mt-5 ">
               <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-yellow-500 ml-2 font-bold">Recommendations</Link>
+              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
               </div>
             </div>
             <div className="p-4 border-b-2">
@@ -154,7 +154,7 @@ const ChunkMode = () => {
               </p>
               <div className="flex gap-3 mt-5 ">
               <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-yellow-500 ml-2 font-bold">Recommendations</Link>
+              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
               </div>
             </div>
             
@@ -175,10 +175,13 @@ const ChunkMode = () => {
         
            <div className="buttons ml-0">
            <ButtonGroup className="flex gap-3">
-            <Button onClick={() => {setDrawer(true)}} color="gray">Analyze</Button>
+            {/* <Button onClick={() => {setDrawer(true)}} color="gray">Analyze</Button>
             <Button color="gray">Edit</Button>
-            <Button color="gray">Comment</Button>
-            <IoCloseCircleOutline onClick={()=>{navigate(-1)}} className='ml-[700px] mt-3 cursor-pointer'/>
+            <Button color="gray">Comment</Button> */}
+            <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-yellow-700 border border-yellow-700  rounded-lg  focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Analyze</button>
+        <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-green-700 border border-green-700  rounded-lg  focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</button>
+        <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center  text-red-700 border border-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Comment</button>
+            {/* <IoCloseCircleOutline onClick={()=>{navigate(-1)}} className='ml-[700px] mt-3 cursor-pointer text-lg'/> */}
           </ButtonGroup>
           
            </div>

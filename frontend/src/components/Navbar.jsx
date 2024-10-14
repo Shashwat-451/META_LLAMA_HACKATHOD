@@ -43,9 +43,10 @@ const Navbar = () => {
                 className="h-8 me-3"
                 alt="FlowBite Logo"
               />
-              <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white ml-3">
-                Biosimilar
-              </span>
+              <h1 style={{fontSize:"30px"}} className="self-center text-900 font-bold sm:text-2xl whitespace-nowrap dark:text-white ml-3">
+                BIOSIMILAR
+              </h1>
+              
             </Link>
           </div>
           <div className="flex items-center flex-col">
@@ -59,7 +60,7 @@ const Navbar = () => {
                 >
                   <span className="sr-only">Open user menu</span>
                   <img
-                    className="w-8 h-8 rounded-full"
+                    className="w-10 h-10 rounded-full"
                     src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
                     alt="user photo"
                   />
