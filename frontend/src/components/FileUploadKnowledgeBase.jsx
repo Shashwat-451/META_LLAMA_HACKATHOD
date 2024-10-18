@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-hot-toast';
 
-const FileUpload = () => {
+const FileUploadKnowledgeBase = () => {
   const [progress, setProgress] = useState(0);
   const [uploadedFile, setUploadedFile] = useState(null);
 
@@ -123,7 +123,7 @@ const FileUpload = () => {
           </div>
         </div>
       ) : (
-        <div className=" w-[30vw] h-[15rem] mt-10 cursor-pointer p-12 flex justify-center align-middle bg-white border border-dashed border-gray-300 rounded-xl  dar:border-neutral-600" onClick={() => document.getElementById('fileInput').click()}>
+        <div className=" w-[30vw] h-[15rem]  cursor-pointer p-12 flex justify-center align-middle bg-white border border-dashed border-gray-300 rounded-xl  dar:border-neutral-600" onClick={() => document.getElementById('fileInput').click()}>
           <div className="text-center">
             <h1><FontAwesomeIcon icon={faUpload} size="2x"/></h1> 
             <div className="mt-4 flex flex-wrap justify-center text-sm leading-6 text-gray-600 align-middle">
@@ -141,4 +141,4 @@ const FileUpload = () => {
   );
 };
 
-export default FileUpload;
+export default FileUploadKnowledgeBase;

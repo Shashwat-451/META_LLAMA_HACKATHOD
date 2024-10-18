@@ -3,9 +3,24 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { Button, ButtonGroup } from "flowbite-react";
 import { IoCloseCircleOutline } from "react-icons/io5";
+import Chatbot from '../components/Chatbot';
+import SidebarErrors from '../components/SidebarErrors';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 const ChunkMode = () => {
     const [drawer, setDrawer] = useState(false);
+    const { id } = useParams();
+    const [card, setCard] = useState(null);
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
+    const [commentWindow, setCommentWindow] = useState(false);
+    const [isTextSelected, setIsTextSelected] = useState(false);
+    const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
+    const [selectedText, setSelectedText] = useState("");
+    const [activeCommentBox,setActiveCommentBox]=useState(false)
+    const [activeComments, setActiveComments] = useState([]); // Default as empty array
+    const [commentBoxPosition, setCommentBoxPosition] = useState({}); // Store position of the comment box
   const navigate=useNavigate()
   const paragraphs = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quas incidunt illum consequatur distinctio commodi dignissimos minima ipsam deserunt modi, id dolores perspiciatis perferendis? Veritatis, consequuntur sed nemo animi saepe, repellendus blanditiis corrupti, velit odio esse eos culpa incidunt quaerat unde rerum ad quas expedita non ducimus debitis! Voluptatem beatae deserunt nobis, quae obcaecati laboriosam consequatur rerum corporis necessitatibus animi iure iste hic aliquam quibusdam sed suscipit dolor molestiae sint veniam eveniet nam. Accusantium dolore architecto velit, odio expedita incidunt eum dolorem corrupti eaque, voluptatum praesentium ea saepe eligendi fuga nihil iure quae? Consequuntur impedit tempore enim repellendus reiciendis ipsam ab autem beatae veniam debitis qui, vitae nemo ex libero, natus deserunt? Itaque ea animi cupiditate veritatis autem reprehenderit ad fugit! Doloremque rerum quod esse provident enim! Inventore totam rem repellendus culpa a minima earum laboriosam velit mollitia quam, dignissimos repudiandae perferendis consectetur ratione cumque? Fugiat aliquam, magni quae libero expedita officia, nulla esse voluptate totam sit corrupti nisi dolor enim ut eligendi quo repellat accusamus voluptatum! Quas deserunt adipisci qui eum eius ipsam natus tenetur, minima illum, nulla beatae cum esse dicta soluta neque? Deleniti, architecto, earum, repudiandae voluptates aliquam beatae incidunt impedit explicabo iste omnis nihil aspernatur commodi?",
@@ -30,136 +45,33 @@ const ChunkMode = () => {
       setCurrentIndex(currentIndex - 1);
     }
   };
+  useEffect(() => {
+    const handleSelection = () => {
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) {
+        const range = selection.getRangeAt(0);
+        const rect = range.getBoundingClientRect();
+
+        setSelectedText(selection.toString());
+        setButtonPosition({ top: rect.top + window.scrollY, right: rect.right });
+        setIsTextSelected(true);
+      } else {
+        setIsTextSelected(false);
+      }
+    };
+
+    document.addEventListener("mouseup", handleSelection);
+    return () => {
+      document.removeEventListener("mouseup", handleSelection);
+    };
+  }, []);
 
   return (
    
     <>
-    <div
-          className="hs-overlay hs-overlay-open:translate-x-0 fixed top-0 right-0 transition-all duration-300 transform h-full w-[25vw] z-[80] bg-white border-s dark:bg-neutral-800 dark:border-neutral-700 border-l-2 overflow-y-auto"
-          role="dialog"
-          tabIndex="-1"
-        >
-          {/* <button
-            type="button"
-            className="size-8 mt-4 ml-4 inline-flex justify-center items-center gap-x-2 rounded-full border border-transparent bg-gray-100 text-gray-800 hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:text-neutral-400 dark:focus:bg-neutral-600"
-            onClick={() => {
-              setDrawer(false);
-            }}
-            aria-label="Close"
-          >
-            <span className="sr-only">Close</span>
-            <svg
-              className="shrink-0 size-4"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 6 6 18"></path>
-              <path d="m6 6 12 12"></path>
-            </svg>
-          </button> */}
-          <div className="flex justify-between items-center py-3 px-4 border-b dark:border-neutral-700">
-            <button
-              type="button"
-              class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
-            >
-              Errors
-              <span class="inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium bg-red-500 text-white">
-                5
-              </span>
-            </button>
-
-            <button
-              type="button"
-              class="py-3 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800"
-            >
-              Recommendations
-              <span class="inline-flex items-center py-0.5 px-1.5 rounded-full text-xs font-medium bg-green-500 text-white">
-                10
-              </span>
-            </button>
-          </div>
-
-          <div className="errors flex flex-col gap-5">
-            <div className="p-4 border-b-2">
-              <p className="text-gray-800 dark:text-neutral-400">
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
-              </p>
-              <div className="flex gap-3 mt-5 ">
-                <Link className="text-blue-500 font-bold">Sources</Link>
-                <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
-              </div>
-            </div>
-            <div className="p-4 border-b-2">
-              <p className="text-gray-800 dark:text-neutral-400">
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
-              </p>
-              <div className="flex gap-3 mt-5 ">
-              <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
-              </div>
-            </div>
-            <div className="p-4 border-b-2">
-              <p className="text-gray-800 dark:text-neutral-400">
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
-              </p>
-              <div className="flex gap-3 mt-5 ">
-              <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
-              </div>
-            </div>
-            <div className="p-4 border-b-2">
-              <p className="text-gray-800 dark:text-neutral-400">
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
-              </p>
-              <div className="flex gap-3 mt-5 ">
-              <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
-              </div>
-            </div>
-            <div className="p-4 border-b-2">
-              <p className="text-gray-800 dark:text-neutral-400">
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
-              </p>
-              <div className="flex gap-3 mt-5 ">
-              <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
-              </div>
-            </div>
-            <div className="p-4 border-b-2">
-              <p className="text-gray-800 dark:text-neutral-400">
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
-              </p>
-              <div className="flex gap-3 mt-5 ">
-              <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
-              </div>
-            </div>
-            <div className="p-4 border-b-2">
-              <p className="text-gray-800 dark:text-neutral-400">
-                Some text as placeholder. In real life you can have the elements
-                you have chosen. Like, text, images, lists, etc.
-              </p>
-              <div className="flex gap-3 mt-5 ">
-              <Link className="text-blue-500 font-bold">Sources</Link>
-              <Link className="text-green-500 ml-2 font-bold">Recommendations</Link>
-              </div>
-            </div>
-            
-          </div>
-        </div>
+      <Chatbot/>
+      <SidebarErrors/>
+     
 
      <div className="flex flex-col ml-10 min-h-screen p-4 w-[100%]">
       <div className="w-[68%] text-center mb-4 mt-10 text-justify">
@@ -175,25 +87,18 @@ const ChunkMode = () => {
         
            <div className="buttons ml-0">
            <ButtonGroup className="flex gap-3">
-            {/* <Button onClick={() => {setDrawer(true)}} color="gray">Analyze</Button>
-            <Button color="gray">Edit</Button>
-            <Button color="gray">Comment</Button> */}
-            <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-yellow-700 border border-yellow-700  rounded-lg  focus:ring-4 focus:outline-none focus:ring-yellow-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Analyze</button>
-        <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-green-700 border border-green-700  rounded-lg  focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Edit</button>
-        <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center  text-red-700 border border-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Comment</button>
-            {/* <IoCloseCircleOutline onClick={()=>{navigate(-1)}} className='ml-[700px] mt-3 cursor-pointer text-lg'/> */}
+        <button onClick={()=>setDrawer(!drawer)} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-yellow-700 border border-yellow-700  rounded-lg  focus:ring-4 focus:outline-none focus:ring-yellow-300 dar:bg-blue-600 dar:hover:bg-blue-700 dar:focus:ring-blue-800">Analyze</button>
+        <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-green-700 border border-green-700  rounded-lg  focus:ring-4 focus:outline-none focus:ring-green-300 dar:bg-blue-600 dar:hover:bg-blue-700 dar:focus:ring-blue-800">Edit</button>
+        <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center  text-red-700 border border-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300 dar:bg-blue-600 dar:hover:bg-blue-700 dar:focus:ring-blue-800">Comment</button>
           </ButtonGroup>
           
            </div>
            
-        {/* Highlighted Current Paragraph */}
         <div className="flex items-center justify-center">
           <p className="relative text-lg leading-relaxed text-gray-800 transition-all duration-300 ease-in-out z-10 opacity-100">
             {paragraphs[currentIndex]}
           </p>
         </div>
-
-        {/* Navigation Buttons at the Bottom */}
         <div className="absolute bottom-2 right-0 flex justify-around p-2">
           <button
             onClick={handlePrev}
@@ -217,7 +122,7 @@ const ChunkMode = () => {
       </div>
 
       {/* Display Next Paragraphs */}
-      <div className="w-[68%] text-center mt-4 text-justify">
+      <div className="w-[68%] mt-4 text-justify">
         {paragraphs.slice(currentIndex + 1).map((para, i) => (
           <p key={i} className="text-gray-500 text-sm opacity-50 mb-2">
             {para}

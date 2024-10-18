@@ -6,6 +6,7 @@ import KnowldegeManagement from "./pages/KnowldegeManagement"
 import MyFiles from "./pages/MyFiles"
 import ReviewDoc from "./pages/ReviewDoc";
 import ChunkMode from "./pages/ChunkMode";
+import Dashboard from "./pages/Dashboard";
 function App() {
   return (
     <Routes>
@@ -14,6 +15,7 @@ function App() {
         <Route path="/myFiles" element={<MyFiles/>} />
         <Route path="/myFiles/:id" element={<ReviewDoc/>} />
         <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/chunkmode" element={<ChunkMode/>} />
         <Route path="/signup" element={<Signup/>} />
