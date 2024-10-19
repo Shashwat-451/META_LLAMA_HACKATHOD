@@ -12,11 +12,15 @@ const Chatbot = () => {
 
   const initializeSession = async () => {
     try {
+      console.log("Initializing session...");
       const myHeaders = new Headers();
       myHeaders.append("accept", "application/json");
       myHeaders.append("X-App", "generic_poll");
       myHeaders.append("source", "web");
       myHeaders.append("X-Conversation-Id", "dummy");
+      myHeaders.append("bypass-tunnel-reminder", "true");
+      myHeaders.append("User-Agent", "custom-agent");
+
       myHeaders.append("Authorization", "Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk");
 
       const requestOptions = {
@@ -24,7 +28,7 @@ const Chatbot = () => {
         headers: myHeaders,
       };
 
-      const response = await fetch("http://localhost:8000/chat/init?contact_number=99999&mock=True&use_case=ray_dashboard_v2&conversation_id=1234&merchant_id=AwPtzAJaaChm5O&user_role=demo", requestOptions);
+      const response = await fetch("https://honest-apples-show.loca.lt/chat/init?contact_number=99999&mock=True&use_case=ray_dashboard_v2&conversation_id=1234&merchant_id=AwPtzAJaaChm5O&user_role=demo", requestOptions);
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
@@ -57,14 +61,16 @@ const Chatbot = () => {
         formData.append('step', '');
         formData.append('file', '');
 
-        const response = await fetch('http://localhost:8000/chat/process_message', {
+        const response = await fetch('https://honest-apples-show.loca.lt/chat/process_message', {
           method: 'POST',
           headers: {
             'X-App': 'generic_poll',
             'session-id': sessionId,
             'source': 'web',
             'Authorization': 'Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk',
-            'accept': 'application/json'
+            'accept': 'application/json',
+            'bypass-tunnel-reminder': 'true',
+            'User-Agent': 'custom-agent',
           },
           body: formData
         });
@@ -99,9 +105,10 @@ const Chatbot = () => {
   };
 
   const fetchMessages = async () => {
+
     if (sessionId) {
       try {
-        const response = await fetch('http://localhost:8000/chat/retrieve_messages', {
+        const response = await fetch('https://honest-apples-show.loca.lt/chat/retrieve_messages', {
           method: 'GET',
           headers: {
             'accept': 'application/json',
@@ -109,6 +116,8 @@ const Chatbot = () => {
             'session-id': sessionId,
             'source': 'web',
             'Authorization': 'Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk',
+            'bypass-tunnel-reminder': 'true',
+            'User-Agent': 'custom-agent',
           }
         });
 
@@ -137,7 +146,7 @@ const Chatbot = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchMessages();
-    }, 5000);
+    }, 2000);
 
     if(!isOpen){
       return () => clearInterval(interval);
