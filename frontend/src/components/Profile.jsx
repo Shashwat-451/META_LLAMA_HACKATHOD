@@ -4,7 +4,7 @@ function Profile(props) {
     return (
         <>
             <div
-                className="z-50 w-[9rem] fixed mt-40 right-12 text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dar:bg-gray-700 dar:divide-gray-600"
+                className="z-50 w-[9rem] fixed top-16 right-5 text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dar:bg-gray-700 dar:divide-gray-600"
                 id="dropdown-user"
             >
                 <div className="px-4 py-3">

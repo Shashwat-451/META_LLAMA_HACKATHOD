@@ -72,7 +72,7 @@ const Sidebar = () => {
           <ul className="space-y-4 mt-10">
             <li>
               <Link
-                to="/"
+                to="/knowledge-management"
                 className="flex items-center p-3 text-lg font-semibold text-gray-300 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200"
               >
                 <svg
@@ -90,7 +90,7 @@ const Sidebar = () => {
             </li>
             <li>
               <Link
-                to="/myFiles"
+                to="/my-files"
                 className="flex items-center p-3 text-lg font-semibold text-gray-300 rounded-lg hover:bg-gray-700 hover:text-white transition-all duration-200"
               >
                 <svg

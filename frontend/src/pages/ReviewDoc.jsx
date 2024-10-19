@@ -2,7 +2,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Chatbot from "../components/Chatbot";
 import { FaComment } from "react-icons/fa";
-import SidebarErrors from "../components/SidebarErrors"
+import SidebarErrors from "../components/SidebarErrors";
 const ReviewDoc = () => {
   const { id } = useParams();
   const [card, setCard] = useState(null);
@@ -13,7 +13,7 @@ const ReviewDoc = () => {
   const [isTextSelected, setIsTextSelected] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({ top: 0, right: 0 });
   const [selectedText, setSelectedText] = useState("");
-  const [activeCommentBox,setActiveCommentBox]=useState(false)
+  const [activeCommentBox, setActiveCommentBox] = useState(false);
   const [activeComments, setActiveComments] = useState([]); // Default as empty array
   const [commentBoxPosition, setCommentBoxPosition] = useState({}); // Store position of the comment box
   const navigate = useNavigate();
@@ -35,7 +35,10 @@ const ReviewDoc = () => {
         const rect = range.getBoundingClientRect();
 
         setSelectedText(selection.toString());
-        setButtonPosition({ top: rect.top + window.scrollY, right: rect.right });
+        setButtonPosition({
+          top: rect.top + window.scrollY,
+          right: rect.right,
+        });
         setIsTextSelected(true);
       } else {
         setIsTextSelected(false);
@@ -71,10 +74,8 @@ const ReviewDoc = () => {
   const renderParagraphs = () => {
     const paragraphs = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quas incidunt illum consequatur distinctio commodi dignissimos minima ipsam deserunt modi, id dolores perspiciatis perferendis? Veritatis, consequuntur sed nemo animi saepe, repellendus blanditiis corrupti, velit odio esse eos culpa incidunt quaerat unde rerum ad quas expedita non ducimus debitis! Voluptatem beatae deserunt nobis, quae obcaecati laboriosam consequatur rerum corporis necessitatibus animi iure iste hic aliquam quibusdam sed suscipit dolor molestiae sint veniam eveniet nam. Accusantium dolore architecto velit, odio expedita incidunt eum dolorem corrupti eaque, voluptatum praesentium ea saepe eligendi fuga nihil iure quae? Consequuntur impedit tempore enim repellendus reiciendis ipsam ab autem beatae veniam debitis qui, vitae nemo ex libero, natus deserunt? Itaque ea animi cupiditate veritatis autem reprehenderit ad fugit! Doloremque rerum quod esse provident enim! Inventore totam rem repellendus culpa a minima earum laboriosam velit mollitia quam, dignissimos repudiandae perferendis consectetur ratione cumque? Fugiat aliquam, magni quae libero expedita officia, nulla esse voluptate totam sit corrupti nisi dolor enim ut eligendi quo repellat accusamus voluptatum! Quas deserunt adipisci qui eum eius ipsam natus tenetur, minima illum, nulla beatae cum esse dicta soluta neque? Deleniti, architecto, earum, repudiandae voluptates aliquam beatae incidunt impedit explicabo iste omnis nihil aspernatur commodi?",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quas incidunt illum consequatur distinctio commodi dignissimos minima ipsam deserunt modi, id dolores perspiciatis perferendis? Veritatis, consequuntur sed nemo animi saepe, repellendus blanditiis corrupti, velit odio esse eos culpa incidunt quaerat unde rerum ad quas expedita non ducimus debitis! Voluptatem beatae deserunt nobis, quae obcaecati laboriosam consequatur rerum corporis necessitatibus animi iure iste hic aliquam quibusdam sed suscipit dolor molestiae sint veniam eveniet nam. Accusantium dolore architecto velit, odio expedita incidunt eum dolorem corrupti eaque, voluptatum praesentium ea saepe eligendi fuga nihil iure quae? Consequuntur impedit tempore enim repellendus reiciendis ipsam ab autem beatae veniam debitis qui, vitae nemo ex libero, natus deserunt? Itaque ea animi cupiditate veritatis autem reprehenderit ad fugit! Doloremque rerum quod esse provident enim! Inventore totam rem repellendus culpa a minima earum laboriosam velit mollitia quam, dignissimos repudiandae perferendis consectetur ratione cumque? Fugiat aliquam, magni quae libero expedita officia, nulla esse voluptate totam sit corrupti nisi dolor enim ut eligendi quo repellat accusamus voluptatum! Quas deserunt adipisci qui eum eius ipsam natus tenetur, minima illum, nulla beatae cum esse dicta soluta neque? Deleniti, architecto, earum, repudiandae voluptates aliquam beatae incidunt impedit explicabo iste omnis nihil aspernatur commodi?",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quas incidunt illum consequatur distinctio commodi dignissimos minima ipsam deserunt modi, id dolores perspiciatis perferendis? Veritatis, consequuntur sed nemo animi saepe, repellendus blanditiis corrupti, velit odio esse eos culpa incidunt quaerat unde rerum ad quas expedita non ducimus debitis! Voluptatem beatae deserunt nobis, quae obcaecati laboriosam consequatur rerum corporis necessitatibus animi iure iste hic aliquam quibusdam sed suscipit dolor molestiae sint veniam eveniet nam. Accusantium dolore architecto velit, odio expedita incidunt eum dolorem corrupti eaque, voluptatum praesentium ea saepe eligendi fuga nihil iure quae? Consequuntur impedit tempore enim repellendus reiciendis ipsam ab autem beatae veniam debitis qui, vitae nemo ex libero, natus deserunt? Itaque ea animi cupiditate veritatis autem reprehenderit ad fugit! Doloremque rerum quod esse provident enim! Inventore totam rem repellendus culpa a minima earum laboriosam velit mollitia quam, dignissimos repudiandae perferendis consectetur ratione cumque? Fugiat aliquam, magni quae libero expedita officia, nulla esse voluptate totam sit corrupti nisi dolor enim ut eligendi quo repellat accusamus voluptatum! Quas deserunt adipisci qui eum eius ipsam natus tenetur, minima illum, nulla beatae cum esse dicta soluta neque? Deleniti, architecto, earum, repudiandae voluptates aliquam beatae incidunt impedit explicabo iste omnis nihil aspernatur commodi?",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quas incidunt illum consequatur distinctio commodi dignissimos minima ipsam deserunt modi, id dolores perspiciatis perferendis? Veritatis, consequuntur sed nemo animi saepe, repellendus blanditiis corrupti, velit odio esse eos culpa incidunt quaerat unde rerum ad quas expedita non ducimus debitis! Voluptatem beatae deserunt nobis, quae obcaecati laboriosam consequatur rerum corporis necessitatibus animi iure iste hic aliquam quibusdam sed suscipit dolor molestiae sint veniam eveniet nam. Accusantium dolore architecto velit, odio expedita incidunt eum dolorem corrupti eaque, voluptatum praesentium ea saepe eligendi fuga nihil iure quae? Consequuntur impedit tempore enim repellendus reiciendis ipsam ab autem beatae veniam debitis qui, vitae nemo ex libero, natus deserunt? Itaque ea animi cupiditate veritatis autem reprehenderit ad fugit! Doloremque rerum quod esse provident enim! Inventore totam rem repellendus culpa a minima earum laboriosam velit mollitia quam, dignissimos repudiandae perferendis consectetur ratione cumque? Fugiat aliquam, magni quae libero expedita officia, nulla esse voluptate totam sit corrupti nisi dolor enim ut eligendi quo repellat accusamus voluptatum! Quas deserunt adipisci qui eum eius ipsam natus tenetur, minima illum, nulla beatae cum esse dicta soluta neque? Deleniti, architecto, earum, repudiandae voluptates aliquam beatae incidunt impedit explicabo iste omnis nihil aspernatur commodi?",
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat quas incidunt illum consequatur distinctio commodi dignissimos minima ipsam deserunt modi, id dolores perspiciatis perferendis? Veritatis, consequuntur sed nemo animi saepe, repellendus blanditiis corrupti, velit odio esse eos culpa incidunt quaerat unde rerum ad quas expedita non ducimus debitis! Voluptatem beatae deserunt nobis, quae obcaecati laboriosam consequatur rerum corporis necessitatibus animi iure iste hic aliquam quibusdam sed suscipit dolor molestiae sint veniam eveniet nam. Accusantium dolore architecto velit, odio expedita incidunt eum dolorem corrupti eaque, voluptatum praesentium ea saepe eligendi fuga nihil iure quae? Consequuntur impedit tempore enim repellendus reiciendis ipsam ab autem beatae veniam debitis qui, vitae nemo ex libero, natus deserunt? Itaque ea animi cupiditate veritatis autem reprehenderit ad fugit! Doloremque rerum quod esse provident enim! Inventore totam rem repellendus culpa a minima earum laboriosam velit mollitia quam, dignissimos repudiandae perferendis consectetur ratione cumque? Fugiat aliquam, magni quae libero expedita officia, nulla esse voluptate totam sit corrupti nisi dolor enim ut eligendi quo repellat accusamus voluptatum! Quas deserunt adipisci qui eum eius ipsam natus tenetur, minima illum, nulla beatae cum esse dicta soluta neque? Deleniti, architecto, earum, repudiandae voluptates aliquam beatae incidunt impedit explicabo iste omnis nihil aspernatur commodi?",
+      "Temporibus illum molestiae, ipsa alias laudantium, dolores commodi quia. Qui necessitatibus tenetur soluta, assumenda officia voluptates dolorem repellendus voluptatum rerum eius asperiores ab explicabo itaque at atque perspiciatis optio fuga aut esse enim obcaecati maxime! Cumque sapiente molestiae pariatur libero hic temporibus distinctio eos voluptatibus exercitationem consequatur, autem illo possimus quam ipsa praesentium nobis corrupti quas voluptatum architecto omnis! Voluptate, recusandae sunt id soluta delectus, reiciendis odit suscipit doloribus facilis qui blanditiis nulla veniam nihil. Eius atque aliquam saepe inventore iste quisquam distinctio voluptatem.",
+      "Quibusdam doloribus tenetur nihil, placeat maxime. Mollitia, natus reiciendis tempora officiis dignissimos quae aperiam nesciunt commodi culpa minus impedit explicabo beatae quam optio dolorum dolore. Blanditiis omnis nostrum iure reprehenderit exercitationem consequuntur ipsum fuga eius nesciunt laboriosam esse, recusandae deserunt voluptates libero veniam! Aperiam assumenda quaerat cupiditate recusandae distinctio eveniet molestiae incidunt asperiores veritatis sit voluptatum, rerum vitae atque quibusdam expedita dolore nemo corporis cum dolorum odio, alias illo sed. Eum facere architecto optio repudiandae labore iure, laborum accusantium error maiores, minima dignissimos, officia quas aspernatur necessitatibus tempora molestiae.",
     ];
 
     return paragraphs.map((para, index) => {
@@ -82,31 +83,22 @@ const ReviewDoc = () => {
         para.includes(comment.text)
       );
 
-      // const handleShowComments = (event) => {
-      //   // Display comment box when count is clicked
-      //   const rect = event.target.getBoundingClientRect();
-      //   setCommentBoxPosition({ top: rect.top + window.scrollY, left: rect.right });
-      //   setActiveComments(relatedComments.length > 0 ? relatedComments : []);
-      // };
+      const handleShowComments = (event) => {
+        // Get the button's position
+        setActiveCommentBox(!activeCommentBox);
+        const rect = event.target.getBoundingClientRect();
 
-    const handleShowComments = (event) => {
-      // Get the button's position
-      setActiveCommentBox(!activeCommentBox)
-      const rect = event.target.getBoundingClientRect();
+        setCommentBoxPosition({
+          top: rect.bottom + window.scrollY,
+          left: rect.left + window.scrollX,
+        });
 
-    
-      setCommentBoxPosition({
-          top: rect.bottom + window.scrollY, 
-          left: rect.left + window.scrollX, 
-      });
-
-      // Toggle the comment box display
-      if (activeComments === relatedComments) {
-          setActiveComments([]); // Close the comment box
-      } else {
-          setActiveComments(relatedComments); // Show the comment box
-      }
-  };
+        if (activeComments === relatedComments) {
+          setActiveComments([]); 
+        } else {
+          setActiveComments(relatedComments); 
+        }
+      };
 
       return (
         <div key={index} className="relative mb-4">
@@ -150,7 +142,7 @@ const ReviewDoc = () => {
 
   return (
     <div className="flex">
-      <SidebarErrors/>
+      <SidebarErrors />
       {commentWindow && (
         <div
           className="commentWindow shadow-lg p-4 bg-white rounded-lg flex flex-col justify-center z-50"
@@ -162,39 +154,41 @@ const ReviewDoc = () => {
             zIndex: 10,
           }}
         >
-        <form onSubmit={addComment} className="flex flex-col gap-4 p-4 bg-white shadow-lg rounded-lg border border-gray-200">
-  <div className="flex items-center">
-    <img
-      src="https://via.placeholder.com/40" // Placeholder for user avatar
-      alt="User Avatar"
-      className="rounded-full mr-2"
-    />
-    <h1 className="text-lg font-semibold">Shashwat Mishra</h1>
-  </div>
-  <textarea
-    onChange={handleCommentChange}
-    value={newComment}
-    className="border border-gray-300 p-3 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
-    placeholder="Write your comment here..."
-    rows={4}
-  />
-  <div className="flex justify-end gap-2">
-    <button
-      type="button"
-      className="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition duration-200 hover:bg-gray-400"
-      onClick={() => setCommentWindow(false)}
-    >
-      Cancel
-    </button>
-    <button
-      type="submit"
-      className="bg-blue-500 text-white px-4 py-2 rounded-lg transition duration-200 hover:bg-blue-600"
-    >
-      Save
-    </button>
-  </div>
-</form>
-
+          <form
+            onSubmit={addComment}
+            className="flex flex-col gap-4 p-4 bg-white shadow-lg rounded-lg border border-gray-200"
+          >
+            <div className="flex items-center">
+              <img
+                src="https://via.placeholder.com/40" // Placeholder for user avatar
+                alt="User Avatar"
+                className="rounded-full mr-2"
+              />
+              <h1 className="text-lg font-semibold">Shashwat Mishra</h1>
+            </div>
+            <textarea
+              onChange={handleCommentChange}
+              value={newComment}
+              className="border border-gray-300 p-3 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200"
+              placeholder="Write your comment here..."
+              rows={4}
+            />
+            <div className="flex justify-end gap-2">
+              <button
+                type="button"
+                className="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg transition duration-200 hover:bg-gray-400"
+                onClick={() => setCommentWindow(false)}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded-lg transition duration-200 hover:bg-blue-600"
+              >
+                Save
+              </button>
+            </div>
+          </form>
         </div>
       )}
 

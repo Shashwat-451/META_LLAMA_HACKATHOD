@@ -89,7 +89,7 @@ const ChunkMode = () => {
            <ButtonGroup className="flex gap-3">
         <button onClick={()=>setDrawer(!drawer)} className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-yellow-700 border border-yellow-700  rounded-lg  focus:ring-4 focus:outline-none focus:ring-yellow-300 dar:bg-blue-600 dar:hover:bg-blue-700 dar:focus:ring-blue-800">Analyze</button>
         <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-green-700 border border-green-700  rounded-lg  focus:ring-4 focus:outline-none focus:ring-green-300 dar:bg-blue-600 dar:hover:bg-blue-700 dar:focus:ring-blue-800">Edit</button>
-        <button href="#" className="inline-flex items-center px-3 py-2 text-sm font-medium text-center  text-red-700 border border-red-700 rounded-lg focus:ring-4 focus:outline-none focus:ring-red-300 dar:bg-blue-600 dar:hover:bg-blue-700 dar:focus:ring-blue-800">Comment</button>
+
           </ButtonGroup>
           
            </div>

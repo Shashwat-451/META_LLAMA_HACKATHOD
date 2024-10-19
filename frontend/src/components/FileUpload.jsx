@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-hot-toast';
+import axios from 'axios';  // You'll use axios for the API request
 
 const FileUpload = () => {
   const [progress, setProgress] = useState(0);
@@ -9,6 +10,7 @@ const FileUpload = () => {
 
   const handleFileUpload = (file) => {
     setUploadedFile(file);
+
     // Simulate file upload progress
     let uploadProgress = 0;
     const interval = setInterval(() => {
@@ -16,14 +18,37 @@ const FileUpload = () => {
       setProgress(uploadProgress);
       if (uploadProgress >= 100) {
         clearInterval(interval);
-        // Show success toast when upload is complete
         toast.success('File uploaded successfully!');
+        
+        // Post file to the backend API after the upload is complete
+        postFileToAPI(file);
+
         // Reset the form after a short delay
         setTimeout(() => {
           removeFile();
         }, 2000); // Adjust the delay as needed
       }
     }, 200);
+  };
+
+  // Function to post file to the backend API
+  const postFileToAPI = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file); // Append the file to formData
+
+    try {
+      // Sending the file to the backend API
+      const response = await axios.post('https://your-backend.com/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+      console.log('File successfully posted to API:', response.data);
+      toast.success('File posted to the API successfully!');
+    } catch (error) {
+      console.error('Error posting file to API:', error);
+      toast.error('Failed to post the file to the API.');
+    }
   };
 
   const handleDrop = (event) => {
@@ -47,24 +72,12 @@ const FileUpload = () => {
   };
 
   return (
-    <div 
-      data-hs-file-upload='{
-        "url": "/upload",
-        "extensions": {
-          "default": {"class": "shrink-0 size-5"},
-          "xls": {"class": "shrink-0 size-5"},
-          "zip": {"class": "shrink-0 size-5"},
-          "csv": {
-            "icon": "<svg xmlns=\\"http://www.w3.org/2000/svg\\" width=\\"24\\" height=\\"24\\" viewBox=\\"0 0 24 24\\" fill=\\"none\\" stroke=\\"currentColor\\" stroke-width=\\"2\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"><path d=\\"M4 22h14a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v4\\"/><path d=\\"M14 2v4a2 2 0 0 0 2 2h4\\"/><path d=\\"m5 12-3 3 3 3\\"/><path d=\\"m9 18 3-3-3-3\\"/></svg>",
-            "class": "shrink-0 size-5"
-          }
-        }
-      }'
+    <div
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
       {uploadedFile ? (
-        <div className="w-[30vw] h-[15rem] p-3 bg-white border border-solid border-gray-300 rounded-xl  dar:border-neutral-600 flex align-middle justify-center flex-col">
+        <div className="w-[30vw] h-[15rem] p-3 bg-white border border-solid border-gray-300 rounded-xl dar:border-neutral-600 flex align-middle justify-center flex-col">
           <div className="mb-1 flex justify-between items-center">
             <div className="flex items-center gap-x-3">
               <span
@@ -123,9 +136,9 @@ const FileUpload = () => {
           </div>
         </div>
       ) : (
-        <div className=" w-[30vw] h-[15rem] mt-10 cursor-pointer p-12 flex justify-center align-middle bg-white border border-dashed border-gray-300 rounded-xl  dar:border-neutral-600" onClick={() => document.getElementById('fileInput').click()}>
+        <div className="w-[30vw] h-[15rem] mt-10 cursor-pointer p-12 flex justify-center align-middle bg-white border border-dashed border-gray-300 rounded-xl dar:border-neutral-600" onClick={() => document.getElementById('fileInput').click()}>
           <div className="text-center">
-            <h1><FontAwesomeIcon icon={faUpload} size="2x"/></h1> 
+            <h1><FontAwesomeIcon icon={faUpload} size="2x" /></h1>
             <div className="mt-4 flex flex-wrap justify-center text-sm leading-6 text-gray-600 align-middle">
               <span className="pe-1 font-medium text-black">Drop your file here or </span>
               <span className="bg-white font-semibold text-blue-600 hover:text-blue-700 dar:text-blue-500 ml-1"> browse</span>
@@ -135,7 +148,6 @@ const FileUpload = () => {
           <input type="file" id="fileInput" className="hidden" onChange={(e) => handleFileUpload(e.target.files[0])} />
         </div>
       )}
-
       <div className="mt-4 space-y-2 empty:mt-0"></div>
     </div>
   );
