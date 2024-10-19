@@ -5,8 +5,9 @@ import Search from "../components/Search";
 import FileUpload from "../components/FileUpload";
 import Upload from "../components/Upload";
 import Sidebar from "../components/Sidebar";
+import CardGuideline from "../components/CardGuideline";
 
-const MyFiles = () => {
+const GuidelinePage = () => {
   const [modal, setModal] = useState(false);
 
   const files = [
@@ -43,7 +44,7 @@ const MyFiles = () => {
       <div className="flex justify-end mt-44">
         <div className="flex flex-wrap gap-4 w-[80%]">
           {files.map((file) => (
-            <Card key={file.id} data={file} />
+            <CardGuideline key={file.id} data={file} />
           ))}
         </div>
       </div>
@@ -94,7 +95,7 @@ const MyFiles = () => {
   );
 };
 
-export default MyFiles;
+export default GuidelinePage;
 
 
 // import React, { useState, useEffect } from "react";
@@ -108,7 +109,7 @@ export default MyFiles;
 // import FileUpload from "../components/FileUpload";
 // import axios from 'axios';  // Import axios for API calls
 
-// const MyFiles = () => {
+// const GuidelinePage = () => {
 //   const [modal, setModal] = useState(false);
 //   const [files, setFiles] = useState([]);  // State to store fetched file links
 
@@ -116,15 +117,15 @@ export default MyFiles;
 //     // Function to fetch file links from API
 //     const fetchFiles = async () => {
 //       try {
-//         const response = await axios.get('https://your-api-endpoint.com/files'); 
-//         setFiles(response.data); 
+//         const response = await axios.get('https://your-api-endpoint.com/files'); // Replace with your API endpoint
+//         setFiles(response.data); // Assuming response.data is an array of file objects
 //       } catch (error) {
 //         console.error('Error fetching files:', error);
 //       }
 //     };
 
-//     fetchFiles(); 
-//   }, []); 
+//     fetchFiles(); // Call the fetch function
+//   }, []); // Empty dependency array to run on mount
 
 //   const handleEdit = (fileName) => {
 //     console.log(`Editing ${fileName}`);
@@ -212,4 +213,4 @@ export default MyFiles;
 //   );
 // };
 
-// export default MyFiles;
+// export default GuidelinePage;

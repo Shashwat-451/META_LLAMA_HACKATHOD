@@ -91,6 +91,13 @@ const Navbar = () => {
             >
               Knowledge Management
             </Link>
+            <Link
+              to="/guidelinePage"
+              className="block text-gray-800 dark:text-white text-lg font-medium hover:text-blue-500 dark:hover:text-blue-400 transition-colors duration-200"
+              onClick={() => setMenuOpen(false)}
+            >
+              Guidelines
+            </Link>
           </div>
         )}
       </nav>

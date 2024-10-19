@@ -38,11 +38,17 @@ const FileUpload = () => {
 
     try {
       // Sending the file to the backend API
-      const response = await axios.post('https://your-backend.com/upload', formData, {
+
+      const response = await fetch('https://assumed-iowa-networking-zoo.trycloudflare.com/file-upload/', {
+        method: 'POST',
+        body: formData,
         headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+            'bypass-tunnel-reminder': 'true',
+            'User-Agent': 'custom-agent'
+        }
+    });
+
+  
       console.log('File successfully posted to API:', response.data);
       toast.success('File posted to the API successfully!');
     } catch (error) {

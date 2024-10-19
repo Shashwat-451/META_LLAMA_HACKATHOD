@@ -9,6 +9,10 @@ import ChunkMode from "./pages/ChunkMode";
 import Dashboard from "./pages/Dashboard";
 import LandingPage from "./pages/LandingPage";
 import { Navbar } from "flowbite-react";
+import Guidelines2 from "./pages/Guidelines";
+
+import GuidelinePage from "./pages/GuidelinePage";
+import Guidelines from "./pages/Guidelines";
 function App() {
   return (
     <>
@@ -24,6 +28,9 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/chunkmode" element={<ChunkMode/>} />
         <Route path="/signup" element={<Signup/>} />
+        <Route path="/guidelinePage" element={<GuidelinePage/>} />
+        <Route path="/guideline2" element={<Guidelines/>} />
+        <Route path="/guideline2" element={<Guidelines/>} />
       </Routes>
     </>
    
