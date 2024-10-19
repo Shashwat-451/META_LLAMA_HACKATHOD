@@ -17,14 +17,14 @@ const Chatbot = () => {
       myHeaders.append("X-App", "generic_poll");
       myHeaders.append("source", "web");
       myHeaders.append("X-Conversation-Id", "dummy");
-      myHeaders.append("Authorization", "Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk"); // Ensure this is correct
+      myHeaders.append("Authorization", "Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk");
 
       const requestOptions = {
         method: 'GET',
         headers: myHeaders,
       };
 
-      const response = await fetch("https://d8fa-14-143-179-90.ngrok-free.app/chat/init?contact_number=99999&mock=True&use_case=ray_dashboard_v2&conversation_id=1234&merchant_id=AwPtzAJaaChm5O&user_role=demo", requestOptions);
+      const response = await fetch("http://localhost:8080/chat/init?contact_number=99999&mock=True&use_case=ray_dashboard_v2&conversation_id=1234&merchant_id=AwPtzAJaaChm5O&user_role=demo", requestOptions);
       
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
@@ -40,94 +40,97 @@ const Chatbot = () => {
   };
 
   useEffect(() => {
-    initializeSession(); // Call the function when the component mounts
-  }, [sessionId]); // Empty dependency array to run only once
+    initializeSession(); 
+  }, []); 
 
-//   const sendMessage = async () => {
-//     if (inputValue.trim() && sessionId) {
-//       setMessages((prevMessages) => [
-//         ...prevMessages,
-//         { sender: 'User', text: inputValue }
-//       ]);
+  const sendMessage = async () => {
+    if (inputValue.trim() && sessionId) {
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { sender: 'User', text: inputValue }
+      ]);
 
-//       try {
-//         const formData = new FormData();
-//         formData.append('message', inputValue);
-//         formData.append('action', '');
-//         formData.append('step_group', '');
-//         formData.append('step', '');
-//         formData.append('file', '');
+      try {
+        const formData = new FormData();
+        formData.append('message', inputValue);
+        formData.append('action', '');
+        formData.append('step_group', '');
+        formData.append('step', '');
+        formData.append('file', '');
 
-//         const response = await fetch('http://localhost:8080/chat/process_message', {
-//           method: 'POST',
-//           headers: {
-//             'X-App': 'generic_poll',
-//             'session-id': sessionId,
-//             'source': 'web',
-//             'Authorization': 'Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk',
-//             'accept': 'application/json'
-//           },
-//           body: formData
-//         });
+        const response = await fetch('http://localhost:8080/chat/process_message', {
+          method: 'POST',
+          headers: {
+            'X-App': 'generic_poll',
+            'session-id': sessionId,
+            'source': 'web',
+            'Authorization': 'Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk',
+            'accept': 'application/json'
+          },
+          body: formData
+        });
 
-//         if (!response.ok) {
-//           throw new Error(`Error: ${response.status}`);
-//         }
+        if (!response.ok) {
+          throw new Error(`Error: ${response.status}`);
+        }
 
-//         const data = await response.json();
-//         setMessages((prevMessages) => [
-//           ...prevMessages,
-//           { sender: 'Bot', text: data.response }
-//         ]);
-//       } catch (error) {
-//         console.error("Failed to send message:", error);
-//       }
+        const data = await response.json();
+        setInputValue(''); // Clear input after sending
 
-//       setInputValue('');
-//     }
-//   };
+      } catch (error) {
+        console.error("Failed to send message:", error);
+      }
+    }
+  };
 
-//   const handleKeyDown = (e) => {
-//     if (e.key === 'Enter') {
-//       e.preventDefault();
-//       sendMessage();
-//     }
-//   };
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
 
-//   const fetchMessages = async () => {
-//     if (sessionId) {
-//       try {
-//         const response = await fetch('http://localhost:8080/chat/retrieve_messages', {
-//           method: 'GET',
-//           headers: {
-//             'accept': 'application/json',
-//             'X-App': 'generic_poll',
-//             'session-id': sessionId,
-//             'source': 'web',
-//             'Authorization': 'Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk',
-//           }
-//         });
+  const fetchMessages = async () => {
+    if (sessionId) {
+      try {
+        const response = await fetch('http://localhost:8080/chat/retrieve_messages', {
+          method: 'GET',
+          headers: {
+            'accept': 'application/json',
+            'X-App': 'generic_poll',
+            'session-id': sessionId,
+            'source': 'web',
+            'Authorization': 'Basic Z2VuZXJpY191c2VyOnBhc3N3b3Jk',
+          }
+        });
 
-//         if (response.ok) {
-//           const data = await response.json();
-//           const botMessages = data.messages.map((msg) => ({ sender: 'Bot', text: msg }));
-//           setMessages((prevMessages) => [...prevMessages, ...botMessages]);
-//         } else {
-//           console.error("Failed to retrieve messages:", response.statusText);
-//         }
-//       } catch (error) {
-//         console.error("Error fetching messages:", error);
-//       }
-//     }
-//   };
+        if (response.ok) {
+          const data = await response.json();
+          const botMessages = data.messages.map((msg) => ({ sender: 'Bot', text: msg }));
+          
+       
+          if (botMessages.length > 0) {
+            setMessages((prevMessages) => [
+              ...prevMessages,
+              ...botMessages.filter(message => message.text.trim() !== '')
+            ]);
+          }
+        } else {
+          console.error("Failed to retrieve messages:", response.statusText);
+        }
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    }
+  };
 
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       fetchMessages();
-//     }, 2000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchMessages();
+    }, 2000);
 
-//     return () => clearInterval(interval);
-//   }, [sessionId]);
+    return () => clearInterval(interval);
+  }); 
 
   return (
     <div className="fixed bottom-5 right-5 z-50">
@@ -158,7 +161,7 @@ const Chatbot = () => {
           </div>
 
           <div className="p-4 border-t border-gray-200 flex items-center">
-            {/* <input
+            <input
               type="text"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
@@ -169,9 +172,9 @@ const Chatbot = () => {
             <button
               onClick={sendMessage}
               className="ml-2 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
-            > */}
-              {/* Send
-            </button> */}
+            >
+              Send
+            </button>
           </div>
         </div>
       )}
