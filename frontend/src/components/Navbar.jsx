@@ -21,7 +21,7 @@ const Navbar = () => {
           {/* Brand Name */}
           <div className="text-2xl font-bold text-white dark:text-white tracking-wide">
             <Link style={{fontSize:"30px"}} to="/" className="font-sans text-2xl lg:text-2xl transition-transform transform hover:scale-105">
-              Biosimilar
+              Atomix AI
             </Link>
           </div>
 

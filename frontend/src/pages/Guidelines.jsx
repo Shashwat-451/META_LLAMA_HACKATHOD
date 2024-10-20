@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 
-// Updated sample data
 const generated_guideline = [
     {
         "category": "Mandatory Attachments:",

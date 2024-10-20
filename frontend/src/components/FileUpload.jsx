@@ -4,7 +4,9 @@ import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';  // You'll use axios for the API request
 
-const FileUpload = () => {
+const FileUpload = (props) => {
+    const type=props.data
+    console.log("type",type)
   const [progress, setProgress] = useState(0);
   const [uploadedFile, setUploadedFile] = useState(null);
 
@@ -35,11 +37,15 @@ const FileUpload = () => {
   const postFileToAPI = async (file) => {
     const formData = new FormData();
     formData.append('file', file); // Append the file to formData
+    formData.append('type', type);
+    formData.append('filename', file.name);
+    
+  
 
     try {
       // Sending the file to the backend API
 
-      const response = await fetch('https://assumed-iowa-networking-zoo.trycloudflare.com/file-upload/', {
+      const response = await fetch('https://status-peoples-upgrading-recognised.trycloudflare.com/file-upload/', {
         method: 'POST',
         body: formData,
         headers: {

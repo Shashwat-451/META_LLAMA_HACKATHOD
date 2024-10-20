@@ -13,27 +13,27 @@ import Guidelines2 from "./pages/Guidelines";
 
 import GuidelinePage from "./pages/GuidelinePage";
 import Guidelines from "./pages/Guidelines";
+import Preview from "./pages/Preview";
+import Create from "./pages/Create";
 function App() {
   return (
     <>
     <Navbar/>
      <Routes>
-        <Route path="/login" element={<Login />} />
         <Route path="/" element={<LandingPage />} />
-        <Route path="/knowledge-management" element={<KnowldegeManagement/>} />
-        <Route path="/my-files" element={<MyFiles/>} />
-        <Route path="/myFiles/:id" element={<ReviewDoc/>} />
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/signup" element={<Signup/>} />
         <Route path="/login" element={<Login/>} />
         <Route path="/chunkmode" element={<ChunkMode/>} />
-        <Route path="/signup" element={<Signup/>} />
+        <Route path="/my-files" element={<MyFiles/>} />
+        <Route path="/myFiles/:id" element={<ReviewDoc/>} />
+        <Route path="/knowledge-management" element={<KnowldegeManagement/>} />
+        <Route path="/knowledgeManagement/:id" element={<ReviewDoc/>} />
         <Route path="/guidelinePage" element={<GuidelinePage/>} />
-        <Route path="/guideline2" element={<Guidelines/>} />
-        <Route path="/guideline2" element={<Guidelines/>} />
+        <Route path="/guidelines" element={<Guidelines/>} />
+        <Route path="/preview" element={<Preview />} />
+        <Route path="/create" element={<Create/>} />
       </Routes>
     </>
-   
   );
 }
 

@@ -2,16 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { FaUser } from "react-icons/fa";
 import { SiMoleculer } from "react-icons/si";
 
-const Chatbot = () => {
+const Chatbot = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [sessionId, setSessionId] = useState('');
-
+const index=props.index.id;
   const toggleChatbot = () => {
     setIsOpen(!isOpen);
   };
-
+console.log("indez",index)
   const initializeSession = async () => {
     try {
       console.log("Initializing session...");
@@ -29,7 +29,7 @@ const Chatbot = () => {
         headers: myHeaders,
       };
 
-      const response = await fetch("https://proud-bikes-sip.loca.lt/chat/init?contact_number=99999&mock=True&use_case=ray_dashboard_v2&conversation_id=1234&merchant_id=AwPtzAJaaChm5O&user_role=demo", requestOptions);
+      const response = await fetch("https://spine-edinburgh-latex-flying.trycloudflare.com/chat/init?contact_number=99999&mock=True&use_case=ray_dashboard_v2&conversation_id=1234&merchant_id=AwPtzAJaaChm5O&user_role=demo", requestOptions);
 
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
@@ -61,9 +61,9 @@ const Chatbot = () => {
         formData.append('step_group', '');
         formData.append('step', '');
         formData.append('file', '');
-        formData.append("meta","meta_hackathon_index")
+        formData.append("meta",`${index}`)
         setInputValue(''); 
-        const response = await fetch('https://proud-bikes-sip.loca.lt/chat/process_message', {
+        const response = await fetch('https://spine-edinburgh-latex-flying.trycloudflare.com/chat/process_message', {
           method: 'POST',
           headers: {
             'X-App': 'generic_poll',
@@ -105,7 +105,7 @@ const Chatbot = () => {
   const fetchMessages = async () => {
     if (sessionId) {
       try {
-        const response = await fetch('https://proud-bikes-sip.loca.lt/chat/retrieve_messages', {
+        const response = await fetch('https://spine-edinburgh-latex-flying.trycloudflare.com/chat/retrieve_messages', {
           method: 'GET',
           headers: {
             'accept': 'application/json',
